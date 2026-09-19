@@ -1,0 +1,4 @@
+prompt,response,reference
+"What is ETL?","ETL means extract transform and load. It moves source data through transformation into a target system.","ETL stands for extract transform and load and is used to move and transform data between systems."
+"Why use SQL indexes?","Indexes help databases find rows faster and can improve read query performance.","SQL indexes speed data retrieval by providing efficient lookup structures though they add storage and write overhead."
+"What is data validation?","Data validation checks whether data meets expected rules such as types ranges and required values.","Data validation verifies data against defined quality rules constraints and expected formats."
