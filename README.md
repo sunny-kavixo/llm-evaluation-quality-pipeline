@@ -35,6 +35,11 @@ Results are written to `reports/evaluation_results.csv`.
 | response | model response to evaluate |
 | reference | optional trusted reference answer |
 
+`prompt` and `response` are required and must contain non-empty text. Numeric-looking
+values such as `42` are preserved as text. `reference` is optional, and a missing
+reference value is evaluated as an empty string. Additional input columns are
+preserved in the output report.
+
 ## Architecture
 
 `CSV dataset -> evaluator -> scored Pandas DataFrame -> CSV report -> SQL analytics`
