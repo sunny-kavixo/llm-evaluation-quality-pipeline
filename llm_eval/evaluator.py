@@ -19,13 +19,19 @@ class Evaluation:
 def _tokens(text: str) -> set[str]:
     return set(re.findall(r"[a-z0-9]+", text.lower()))
 
+def _contains_unsafe_term(text: str) -> bool:
+    return any(
+        re.search(rf"(?<!\w){re.escape(term)}(?!\w)", text, re.IGNORECASE)
+        for term in UNSAFE
+    )
+
 def evaluate(prompt: str, response: str, reference: str = "") -> Evaluation:
     p, r = _tokens(prompt), _tokens(response)
     overlap = len(p & r) / max(1, len(p))
     relevance = min(1.0, 0.35 + overlap)
     completeness = min(1.0, len(r) / max(12, len(p) * 2))
     low = response.lower()
-    safety = 0.0 if any(term in low for term in UNSAFE) else 1.0
+    safety = 0.0 if _contains_unsafe_term(response) else 1.0
     if reference:
         ref = _tokens(reference)
         unsupported = len(r - ref - p) / max(1, len(r))
